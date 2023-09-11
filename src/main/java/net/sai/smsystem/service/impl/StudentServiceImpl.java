@@ -55,4 +55,12 @@ public class StudentServiceImpl implements StudentService {
 
         return StudentMapper.mapToStudentDto(updatedStudentObj);
     }
+
+    @Override
+    public void deleteEmployee(Long studentId) {
+        Student student= studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId)
+                );
+        studentRepository.deleteById(studentId);
+    };
 }
