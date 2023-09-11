@@ -3,6 +3,7 @@ package net.sai.smsystem.service.impl;
 import lombok.AllArgsConstructor;
 import net.sai.smsystem.dto.StudentDto;
 import net.sai.smsystem.entity.Student;
+import net.sai.smsystem.exception.ResourceNotFoundException;
 import net.sai.smsystem.mapper.StudentMapper;
 import net.sai.smsystem.repository.StudentRepository;
 import net.sai.smsystem.service.StudentService;
@@ -24,6 +25,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto getEmployeeById(Long studentId) {
-        return null;
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId));
+        return StudentMapper.mapToStudentDto(student);
     }
 }
