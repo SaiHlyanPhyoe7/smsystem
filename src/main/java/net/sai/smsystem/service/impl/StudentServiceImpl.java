@@ -21,4 +21,9 @@ public class StudentServiceImpl implements StudentService {
 
         return StudentMapper.mapToStudentDto(savedEmployee);
     }
+
+    @Override
+    public StudentDto getEmployeeById(Long studentId) {
+        return null;
+    }
 }
