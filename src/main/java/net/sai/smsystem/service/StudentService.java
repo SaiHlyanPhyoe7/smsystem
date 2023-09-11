@@ -9,4 +9,6 @@ public interface StudentService {
     StudentDto getEmployeeById(Long studentId);
 
     List<StudentDto> getAllStudents();
+
+    StudentDto updateStudent(Long studentId, StudentDto updatedStudent);
 }
