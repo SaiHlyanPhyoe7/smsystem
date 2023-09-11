@@ -9,6 +9,9 @@ import net.sai.smsystem.repository.StudentRepository;
 import net.sai.smsystem.service.StudentService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
@@ -28,5 +31,12 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId));
         return StudentMapper.mapToStudentDto(student);
+    }
+
+    @Override
+    public List<StudentDto> getAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        return students.stream().map((student) -> StudentMapper.mapToStudentDto(student))
+                .collect(Collectors.toList());
     }
 }
