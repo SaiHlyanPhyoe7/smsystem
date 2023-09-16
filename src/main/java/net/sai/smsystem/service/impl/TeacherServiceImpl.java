@@ -2,6 +2,8 @@ package net.sai.smsystem.service.impl;
 
 import lombok.AllArgsConstructor;
 import net.sai.smsystem.dto.TeacherDto;
+import net.sai.smsystem.entity.Teacher;
+import net.sai.smsystem.repository.TeacherRepository;
 import net.sai.smsystem.service.TeacherService;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +12,12 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
+
+    private TeacherRepository teacherRepository;
+
     @Override
     public TeacherDto createTeacher(TeacherDto teacherDto) {
+//        Teacher teacher=
         return null;
     }
 
