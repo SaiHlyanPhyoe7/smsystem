@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDto getEmployeeById(Long studentId) {
+    public StudentDto getStudentById(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId));
         return StudentMapper.mapToStudentDto(student);
@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteEmployee(Long studentId) {
+    public void deleteStudent(Long studentId) {
         Student student= studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId)
                 );

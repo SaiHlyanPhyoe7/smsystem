@@ -25,7 +25,7 @@ public class StudentController {
 //    Build Get Student by id REST API
     @GetMapping("{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable("id") Long studentId){
-        StudentDto studentDto = studentService.getEmployeeById(studentId);
+        StudentDto studentDto = studentService.getStudentById(studentId);
         return ResponseEntity.ok(studentDto);
     }
 
@@ -48,7 +48,7 @@ public class StudentController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable("id") Long studentId){
-        studentService.deleteEmployee(studentId);
+        studentService.deleteStudent(studentId);
         return ResponseEntity.ok("Student Deleted Success!");
     };
 }
