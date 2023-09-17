@@ -35,4 +35,13 @@ public class TeacherController {
         List<TeacherDto> teachers = teacherService.getAllTeachers();
         return ResponseEntity.ok(teachers);
     }
+
+//    Build Update Teacher REST API
+
+    @PutMapping("{id}")
+    public ResponseEntity<TeacherDto> updateTeacher(@PathVariable("id") Long teacherId,
+                                                    @RequestBody TeacherDto updateTeacher){
+        TeacherDto teacherDto = teacherService.updateTeacher(teacherId, updateTeacher);
+        return ResponseEntity.ok(teacherDto);
+    }
 }
