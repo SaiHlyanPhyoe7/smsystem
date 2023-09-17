@@ -5,10 +5,7 @@ import net.sai.smsystem.dto.TeacherDto;
 import net.sai.smsystem.service.TeacherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -21,5 +18,12 @@ public class TeacherController {
     public ResponseEntity<TeacherDto> createTeacher(@RequestBody TeacherDto teacherDto){
         TeacherDto saveTeacher = teacherService.createTeacher(teacherDto);
         return new ResponseEntity<>(saveTeacher, HttpStatus.CREATED);
+    }
+
+//    Build Get Teacher by id REST API
+    @GetMapping("id")
+    public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") Long teacherId){
+        TeacherDto teacherDto = teacherService.getTeacherById(teacherId);
+        return ResponseEntity.ok(teacherDto);
     }
 }
