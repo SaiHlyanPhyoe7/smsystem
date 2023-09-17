@@ -23,7 +23,7 @@ public class TeacherController {
     }
 
 //    Build Get Teacher by id REST API
-    @GetMapping("id")
+    @GetMapping("{id}")
     public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") Long teacherId){
         TeacherDto teacherDto = teacherService.getTeacherById(teacherId);
         return ResponseEntity.ok(teacherDto);
