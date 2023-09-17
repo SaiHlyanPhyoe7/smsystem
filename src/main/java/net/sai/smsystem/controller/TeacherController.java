@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/teachers")
@@ -25,5 +27,12 @@ public class TeacherController {
     public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") Long teacherId){
         TeacherDto teacherDto = teacherService.getTeacherById(teacherId);
         return ResponseEntity.ok(teacherDto);
+    }
+
+//    Build Get all Teachers REST API
+    @GetMapping
+    public ResponseEntity<List <TeacherDto>> getAllTeacher(){
+        List<TeacherDto> teachers = teacherService.getAllTeachers();
+        return ResponseEntity.ok(teachers);
     }
 }
