@@ -17,33 +17,34 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private StudentRepository studentRepository;
+    private StudentMapper studentMapper;
     @Override
     public StudentDto createStudent(StudentDto studentDto) {
 
-        Student student = StudentMapper.mapToStudent(studentDto);
+        Student student = studentMapper.mapToStudent(studentDto);
         Student savedStudent = studentRepository.save(student);
 
-        return StudentMapper.mapToStudentDto(savedStudent);
+        return studentMapper.mapToStudentDto(savedStudent);
     }
 
     @Override
     public StudentDto getStudentById(Long studentId) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId));
-        return StudentMapper.mapToStudentDto(student);
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id: "+ studentId));
+        return studentMapper.mapToStudentDto(student);
     }
 
     @Override
     public List<StudentDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
-        return students.stream().map((student) -> StudentMapper.mapToStudentDto(student))
+        return students.stream().map(studentMapper::mapToStudentDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
-        Student student = studentRepository.findById(studentId).orElseThrow(
-                () -> new ResourceNotFoundException("Student is not exist with given id : "+ studentId)
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with given id : "+ studentId)
         );
 
         student.setFirstName(updatedStudent.getFirstName());
@@ -52,8 +53,7 @@ public class StudentServiceImpl implements StudentService {
         student.setAge(updatedStudent.getAge());
 
         Student updatedStudentObj = studentRepository.save(student);
-
-        return StudentMapper.mapToStudentDto(updatedStudentObj);
+        return studentMapper.mapToStudentDto(updatedStudentObj);
     }
 
     @Override
