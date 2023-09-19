@@ -17,34 +17,34 @@ import java.util.stream.Collectors;
 public class TeacherServiceImpl implements TeacherService {
 
     private TeacherRepository teacherRepository;
+    private TeacherMapper teacherMapper;
 
     @Override
     public TeacherDto createTeacher(TeacherDto teacherDto) {
-        Teacher teacher= TeacherMapper.mapToTeacher(teacherDto);
-        Teacher saveTeacher= teacherRepository.save(teacher);
-
-        return TeacherMapper.mapToTeacherDto(saveTeacher);
+        Teacher teacher = teacherMapper.mapToTeacher(teacherDto);
+        Teacher savedTeacher = teacherRepository.save(teacher);
+        return teacherMapper.mapToTeacherDto(savedTeacher);
     }
 
     @Override
     public TeacherDto getTeacherById(Long teacherId) {
-        Teacher teacher= teacherRepository.findById(teacherId)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher is not exist with given id :" + teacherId));
-        return TeacherMapper.mapToTeacherDto((teacher));
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id: " + teacherId));
+        return teacherMapper.mapToTeacherDto(teacher);
     }
 
     @Override
     public List<TeacherDto> getAllTeachers() {
         List<Teacher> teachers = teacherRepository.findAll();
-        return teachers.stream().map((teacher) -> TeacherMapper.mapToTeacherDto(teacher))
-                .collect(Collectors.toList());
+        return teachers.stream().map(teacherMapper::mapToTeacherDto).collect(Collectors.toList());
     }
 
     @Override
     public TeacherDto updateTeacher(Long teacherId, TeacherDto updateTeacher) {
-        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(
-                () -> new ResourceNotFoundException("Teacher is not exist with given id :" + teacherId)
-        );
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id: " + teacherId));
+
+        // Update teacher information
         teacher.setFirstName(updateTeacher.getFirstName());
         teacher.setLastName(updateTeacher.getLastName());
         teacher.setEmail(updateTeacher.getEmail());
@@ -52,16 +52,14 @@ public class TeacherServiceImpl implements TeacherService {
         teacher.setAge(updateTeacher.getAge());
         teacher.setYearOfExperience(updateTeacher.getYearOfExperience());
 
-        Teacher updatedTeacherObj = teacherRepository.save(teacher);
-
-        return TeacherMapper.mapToTeacherDto(updatedTeacherObj);
+        Teacher updatedTeacher = teacherRepository.save(teacher);
+        return teacherMapper.mapToTeacherDto(updatedTeacher);
     }
 
     @Override
     public void deleteTeacher(Long teacherId) {
-        Teacher teacher= teacherRepository.findById(teacherId)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher is no exist with given id " + teacherId)
-                );
-        teacherRepository.deleteById(teacherId);
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id: " + teacherId));
+        teacherRepository.delete(teacher);
     }
 }

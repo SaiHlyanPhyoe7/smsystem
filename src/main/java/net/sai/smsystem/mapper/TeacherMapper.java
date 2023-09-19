@@ -2,29 +2,13 @@ package net.sai.smsystem.mapper;
 
 import net.sai.smsystem.dto.TeacherDto;
 import net.sai.smsystem.entity.Teacher;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-public class TeacherMapper {
-    public static TeacherDto mapToTeacherDto(Teacher teacher){
-        return new TeacherDto(
-                teacher.getId(),
-                teacher.getFirstName(),
-                teacher.getLastName(),
-                teacher.getEmail(),
-                teacher.getSubject(),
-                teacher.getAge(),
-                teacher.getYearOfExperience()
-        );
-    }
+@Mapper(componentModel = "spring")
+public interface TeacherMapper {
 
-    public static Teacher mapToTeacher(TeacherDto teacherDto){
-        return new Teacher(
-                teacherDto.getId(),
-                teacherDto.getFirstName(),
-                teacherDto.getLastName(),
-                teacherDto.getEmail(),
-                teacherDto.getSubject(),
-                teacherDto.getAge(),
-                teacherDto.getYearOfExperience()
-        );
-    }
+    TeacherDto mapToTeacherDto(Teacher teacher);
+
+    Teacher mapToTeacher(TeacherDto teacherDto);
 }
