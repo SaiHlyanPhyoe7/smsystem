@@ -36,11 +36,19 @@ public class ClassroomController {
         return ResponseEntity.ok(classrooms);
     }
 
+//    Build Update Classroom Rest API
     @PutMapping("{id}")
     public ResponseEntity<ClassroomDto> updateClassroom(@PathVariable("id") Long classroomId,
                                                         @RequestBody ClassroomDto updateClassroom){
         ClassroomDto classroomDto = classroomService.updateClassroom(classroomId, updateClassroom);
         return ResponseEntity.ok(classroomDto);
+    }
+
+//    Build Delete Classroom REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteClassroom(@PathVariable("id") Long classroomId){
+        classroomService.deleteClassroom(classroomId);
+        return ResponseEntity.ok("Classroom Deleted Success");
     }
 
 }
