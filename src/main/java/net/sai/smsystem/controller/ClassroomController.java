@@ -36,5 +36,11 @@ public class ClassroomController {
         return ResponseEntity.ok(classrooms);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<ClassroomDto> updateClassroom(@PathVariable("id") Long classroomId,
+                                                        @RequestBody ClassroomDto updateClassroom){
+        ClassroomDto classroomDto = classroomService.updateClassroom(classroomId, updateClassroom);
+        return ResponseEntity.ok(classroomDto);
+    }
 
 }
