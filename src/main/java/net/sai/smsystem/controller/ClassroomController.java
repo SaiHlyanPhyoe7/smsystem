@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("api/classrooms")
@@ -26,4 +28,13 @@ public class ClassroomController {
         ClassroomDto classroomDto = classroomService.getClassroomById(classroomId);
         return ResponseEntity.ok(classroomDto);
     }
+
+//    Build Get all classrooms REST API
+    @GetMapping
+    public ResponseEntity<List <ClassroomDto>> getAllClassroom() {
+        List<ClassroomDto> classrooms = classroomService.getAllClassroom();
+        return ResponseEntity.ok(classrooms);
+    }
+
+
 }
