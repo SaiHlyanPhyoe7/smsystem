@@ -8,6 +8,7 @@ import net.sai.smsystem.repository.ClassroomRepository;
 import net.sai.smsystem.service.ClassroomService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClassroomServiceImpl implements ClassroomService {
 
@@ -32,7 +33,9 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public List<ClassroomDto> getAllClassroom() {
-        return null;
+        List<Classroom> classrooms = classroomRepository.findAll();
+        return classrooms.stream().map(classroomMapper::mapToClassroomDto)
+                .collect(Collectors.toList());
     }
 
     @Override
