@@ -61,6 +61,6 @@ public class StudentServiceImpl implements StudentService {
         Student student= studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student is not exist with the given id."+ studentId)
                 );
-        studentRepository.delete(student);
+        studentRepository.deleteById(studentId);
     };
 }
