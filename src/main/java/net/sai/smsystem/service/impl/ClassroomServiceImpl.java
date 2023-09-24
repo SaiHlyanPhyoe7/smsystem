@@ -39,8 +39,17 @@ public class ClassroomServiceImpl implements ClassroomService {
     }
 
     @Override
-    public ClassroomDto updateClassroom(Long classroomId, ClassroomDto classroomDto) {
-        return null;
+    public ClassroomDto updateClassroom(Long classroomId, ClassroomDto updateClassroom) {
+        Classroom classroom= classroomRepository.findById(classroomId)
+                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with thid id : " + classroomId)
+                );
+        classroom.setClassName(updateClassroom.getClassName());
+        classroom.setClassType(updateClassroom.getClassType());
+        classroom.setStudentCount(updateClassroom.getStudentCount());
+        classroom.setTeacherCount(updateClassroom.getTeacherCount());
+
+        Classroom updateClassroomObj = classroomRepository.save(classroom);
+        return classroomMapper.mapToClassroomDto(updateClassroomObj);
     }
 
     @Override
