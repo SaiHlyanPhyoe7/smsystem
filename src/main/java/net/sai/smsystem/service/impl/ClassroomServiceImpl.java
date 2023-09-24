@@ -1,15 +1,19 @@
 package net.sai.smsystem.service.impl;
 
+import lombok.AllArgsConstructor;
 import net.sai.smsystem.dto.ClassroomDto;
 import net.sai.smsystem.entity.Classroom;
 import net.sai.smsystem.exception.ResourceNotFoundException;
 import net.sai.smsystem.mapper.ClassroomMapper;
 import net.sai.smsystem.repository.ClassroomRepository;
 import net.sai.smsystem.service.ClassroomService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@AllArgsConstructor
 public class ClassroomServiceImpl implements ClassroomService {
 
     private ClassroomRepository classroomRepository;
