@@ -41,7 +41,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDto updateClassroom(Long classroomId, ClassroomDto updateClassroom) {
         Classroom classroom= classroomRepository.findById(classroomId)
-                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with thid id : " + classroomId)
+                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with this id : " + classroomId)
                 );
         classroom.setClassName(updateClassroom.getClassName());
         classroom.setClassType(updateClassroom.getClassType());
@@ -54,6 +54,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public void deleteClassroom(Long classroomId) {
-
+        Classroom classroom= classroomRepository.findById(classroomId)
+                .orElseThrow(()->new ResourceNotFoundException("Classroom not found with this id : " + classroomId));
+        classroomRepository.delete(classroom);
     }
 }
