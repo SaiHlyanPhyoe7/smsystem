@@ -22,8 +22,8 @@ This repository contains the codebase for a School Management Website developed 
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository_url>
-   cd school-management-website
+   git clone https://github.com/SaiHlyanPhyoe7/smsystem
+   cd smsystem
    ```
 
 2. **Build and Run using Maven:**
